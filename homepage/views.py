@@ -4,7 +4,7 @@ from .models import PageSection
 from .serializers import PageSectionSerializer
 
 
-class PageSectionsAPIView(APIView):
+class HomepageSectionsAPIView(APIView):
     def get(self, request, format = None):
         sections = PageSection.objects.filter(is_active = True) \
             .select_related('content_type') \

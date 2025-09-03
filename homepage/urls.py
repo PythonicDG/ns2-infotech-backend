@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import PageSectionsAPIView
+from .views import HomepageSectionsAPIView
 
 urlpatterns = [
-    path('fetch-homepage/', PageSectionsAPIView.as_view(), name = 'page-sections'),
+    path('fetch-homepage/', HomepageSectionsAPIView.as_view(), name = 'page-sections'),
 ]
