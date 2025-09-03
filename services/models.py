@@ -76,7 +76,9 @@ class SectionContent(models.Model):
     title = models.CharField(max_length=200, blank=True, null=True, help_text="Main text/title, e.g., 'React.js', 'Discovery', '500+'")
     description = models.TextField(blank=True, null=True, help_text="Descriptive text for the item.")
     tags = models.CharField(max_length=255, blank=True, null=True, help_text="For TECH_ITEM: Comma-separated tags, e.g., 'SSR/SSG, API Routes, Performance'")
-
+    label_1 = models.CharField(blank=True, null=True)
+    label_2 = models.CharField(blank=True, null=True)
+    
     class Meta:
         ordering = ['section', 'order']
         verbose_name = "Section Content Item"

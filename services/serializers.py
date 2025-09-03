@@ -10,6 +10,8 @@ class SectionContentSerializer(serializers.ModelSerializer):
             'icon',
             'title',
             'description',
+            'label_1',
+            'label_2',
             'tags',
             'order',
             'is_active',
