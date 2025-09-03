@@ -12,6 +12,9 @@ class PageSection(models.Model):
         ('BANNER', 'Banner'),
         ('TECH_GRID', 'Technology Grid'),
         ('PROCESS_STEPS', 'Development Process'),
+        ('WHAT_WE_PROVIDE', 'What We Provide'),
+        ('WHY_CHOOSE_OUR_SERVICES', 'Why Choose Our Services'),
+        ('GET_IN_TOUCH', 'Get In Touch'),
         ('CTA', 'Call To Action (Dark)'),
     ]
 
