@@ -12,7 +12,7 @@ from .models import (
 class SubMenuSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubMenu
-        fields = ('text', 'url', 'order')
+        fields = ('text', 'url', 'order', 'slug')
 
 
 class MenuSerializer(serializers.ModelSerializer):

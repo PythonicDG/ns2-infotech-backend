@@ -3,6 +3,7 @@ import io
 from PIL import Image as PilImage
 from django.core.files.base import ContentFile
 from django.db import models
+from django.utils.text import slugify
 
 
 class Menu(models.Model):
@@ -24,9 +25,15 @@ class SubMenu(models.Model):
     url = models.CharField(max_length = 200)
     order = models.PositiveIntegerField(default = 0)
     is_active = models.BooleanField(default = True)
+    slug = models.SlugField(unique = True, max_length = 50, null = True, blank = True)
 
     def __str__(self):
         return f"{self.menu.text} -> {self.text}"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.text)
+        super().save(*args, **kwargs)
 
 
 class FooterSection(models.Model):
