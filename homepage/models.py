@@ -15,6 +15,7 @@ class PageSection(models.Model):
         ('WHY_CHOOSE_US', 'Why Choose Us'),
         ('TESTIMONIALS', 'Testimonials Slider'),
         ('FAQ', 'Frequently Asked Questions'),
+        ('CONTACT_US', 'Contact Us'),
         ('CTA', 'Call To Action'),
     ]
 
@@ -25,7 +26,7 @@ class PageSection(models.Model):
     section_type = models.CharField(max_length = 50, choices = SECTION_TYPES)
     order = models.PositiveIntegerField(default = 0)
     is_active = models.BooleanField(default = True)
-
+    label = models.CharField(max_length = 200, blank = True, null = True)
     super_heading = models.CharField(max_length = 200, blank = True, null = True)
     heading = models.CharField(max_length = 255, blank = True, null = True)
     subheading = models.TextField(blank = True, null = True)
@@ -36,6 +37,9 @@ class PageSection(models.Model):
 
     primary_button_text = models.CharField(max_length = 50, blank = True, null = True)
     primary_button_url = models.CharField(max_length = 200, blank = True, null = True)
+
+    secondary_button_text = models.CharField(max_length = 50, blank = True, null = True)
+    secondary_button_url = models.CharField(max_length = 200, blank = True, null = True)
 
     class Meta:
         ordering = ['order']
