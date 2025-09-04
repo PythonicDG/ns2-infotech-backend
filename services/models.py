@@ -10,7 +10,8 @@ from core.models import SubMenu
 class PageSection(models.Model):
     SECTION_TYPES = [
         ('BANNER', 'Banner'),
-        ('TECH_GRID', 'Technology Grid'),
+        ('TECH_GRID_1', 'Technology Grid 1'),
+        ('TECH_GRID_2', 'Technology Grid 2'),
         ('PROCESS_STEPS', 'Development Process'),
         ('WHAT_WE_PROVIDE', 'What We Provide'),
         ('WHY_CHOOSE_OUR_SERVICES', 'Why Choose Our Services'),
