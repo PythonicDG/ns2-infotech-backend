@@ -52,10 +52,6 @@ class CompanyProfileSerializer(serializers.ModelSerializer):
             'tagline',
             'email',
             'phone',
-            'facebook_url',
-            'twitter_url',
-            'linkedin_url',
-            'instagram_url',
             'copyright_text',
             'credits_text',
         )
