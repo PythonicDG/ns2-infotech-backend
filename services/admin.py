@@ -11,6 +11,7 @@ class SectionContentInline(admin.StackedInline):
         'description',
         'category',
         'tags',
+        'label',
         'order',
         'is_active',
     )
