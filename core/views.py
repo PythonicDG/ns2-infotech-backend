@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
+from .utils import send_contact_email_form
 from .models import (
     Menu,
     FooterSection,
@@ -70,6 +70,7 @@ def contact_form_submit(request):
             subject=subject,
             message=message
         )
+        send_contact_email_form(full_name, email, phone, subject, message)
         return Response({
             "message": "success"
         }, status=status.HTTP_201_CREATED)
