@@ -81,7 +81,7 @@ class SectionContent(models.Model):
     icon = models.ImageField(upload_to='icons/', blank=True, null=True, help_text="Icon for Tech Item or Process Step.")
     title = models.CharField(max_length=200, blank=True, null=True, help_text="Main text/title, e.g., 'React.js', 'Discovery', '500+'")
     description = models.TextField(blank=True, null=True, help_text="Descriptive text for the item.")
-    tags = models.CharField(max_length=255, blank=True, null=True, help_text="For TECH_ITEM: Comma-separated tags, e.g., 'SSR/SSG, API Routes, Performance'")
+    tags = models.TextField(blank=True, null=True, help_text="For TECH_ITEM: Comma-separated tags, e.g., 'SSR/SSG, API Routes, Performance'")
     label = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
