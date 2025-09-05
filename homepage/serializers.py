@@ -29,7 +29,7 @@ class PageSectionSerializer(serializers.ModelSerializer):
             'section_type', 'order', 'is_active',
             'super_heading', 'heading', 'subheading', 'overview_text',
             'background_image', 'primary_image',
-            'primary_button_text', 'primary_button_url',
+            'primary_button_text', 'primary_button_url', 'secondary_button_text', 'secondary_button_url',
             'content_items', 'social_links'
         )
 
