@@ -6,7 +6,7 @@ class SectionContentSerializer(serializers.ModelSerializer):
     class Meta:
         model = SectionContent
         fields = (
-            'label', 'title', 'description', 'text',
+            'label', 'title', 'description', 'text', 'primary_button_text', 'primary_button_url', 'secondary_button_text', 'secondary_button_url',
             'question', 'answer', 'icon', 'order', 'is_active'
         )
 
