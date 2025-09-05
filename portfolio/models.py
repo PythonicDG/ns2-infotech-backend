@@ -11,8 +11,8 @@ from django.contrib.contenttypes.models import ContentType
 class PageSection(models.Model):
     SECTION_TYPES = [
         ('HERO', 'Hero Banner'),
-        ('OUR_FOUNDATION', 'Our Foundation'),
-        ('FEATURED_', 'Featured Projects'),
+        ('FEATURED_PROJECTS', 'Featured Projects'),
+        ('PROJECTS', 'Projects'),
         ('TRUSTED_COMPANIES', 'Trusted Companies'),
         ('KEY_ACHIEVEMENTS', 'Key Achievements'),
         ('OUR_TEAM', 'Our Team'),

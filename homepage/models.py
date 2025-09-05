@@ -13,6 +13,7 @@ class PageSection(models.Model):
         ('HERO', 'Hero Banner'),
         ('OVERVIEW', 'Overview'),
         ('WHY_CHOOSE_US', 'Why Choose Us'),
+        ('OUR_SERVICES', 'Our Services'),
         ('KEY_ACHIVEMENTS', 'Key Achivements'),
         ('TESTIMONIALS', 'Testimonials Slider'),
         ('FAQ', 'Frequently Asked Questions'),
