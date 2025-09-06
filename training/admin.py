@@ -5,7 +5,7 @@ from .models import PageSection, SectionContent
 class SectionContentInline(admin.StackedInline):
     model = SectionContent
     extra = 1
-    fields = ['order', 'is_active', 'icon', 'label', 'title', 'description', 'tags', 'primary_button_text', 'primary_button_url']
+    fields = ['order', 'is_active', 'icon', 'label', 'title', 'description', 'brochures', 'tags', 'primary_button_text', 'primary_button_url']
 
 
 class PageSectionAdmin(admin.ModelAdmin):

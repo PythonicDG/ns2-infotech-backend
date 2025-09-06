@@ -71,6 +71,7 @@ class SectionContent(models.Model):
     label = models.CharField(max_length = 100, blank = True, null = True, help_text = "e.g., the number '1' for a process step, or '500+' for a metric.")
     title = models.CharField(max_length = 200, blank = True, null = True, help_text = "The title of the card or item.")
     description = models.TextField(blank = True, null = True)
+    brochures = models.FileField(upload_to='brochures/', blank=True, null=True)
 
     tags = models.CharField(max_length = 255, blank = True, null = True, help_text = "Comma-separated tags, e.g., Digital Skills,Data Analytics")
 
