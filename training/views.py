@@ -4,9 +4,15 @@ from rest_framework import status
 from .models import PageSection
 from .serializers import PageSectionSerializer
 
-class PageSectionList(APIView):
+class PageSectionTraining(APIView):
 
     def get(self, request, *args, **kwargs):
-        page_sections = PageSection.objects.all().order_by('order')
+        slug = request.query_params.get('slug')  # e.g., ?slug=corporate-training
+
+        if slug:
+            page_sections = PageSection.objects.filter(submenu__slug=slug, is_active=True).order_by('order')
+        else:
+            page_sections = PageSection.objects.filter(is_active=True).order_by('order')
+
         serializer = PageSectionSerializer(page_sections, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

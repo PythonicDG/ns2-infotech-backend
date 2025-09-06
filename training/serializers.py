@@ -8,13 +8,19 @@ class SectionContentSerializer(serializers.ModelSerializer):
 
 
 class PageSectionSerializer(serializers.ModelSerializer):
+    submenu_slug = serializers.SlugRelatedField(
+        source='submenu',
+        read_only=True,
+        slug_field='slug'
+    )
     content_items = SectionContentSerializer(many=True, read_only=True)
 
     class Meta:
         model = PageSection
         fields = [
-            'id', 'section_type', 'order', 'is_active', 'super_heading', 'heading', 
-            'highlighted_heading', 'subheading', 'background_image', 'primary_image',
-            'overlay_title', 'overlay_description', 'primary_button_text', 'primary_button_url', 
-            'secondary_button_text', 'secondary_button_url', 'content_items'
+            'id', 'submenu_slug', 'section_type', 'order', 'is_active',
+            'super_heading', 'heading', 'highlighted_heading', 'subheading',
+            'background_image', 'primary_image', 'overlay_title', 'overlay_description',
+            'primary_button_text', 'primary_button_url', 'secondary_button_text',
+            'secondary_button_url', 'content_items'
         ]

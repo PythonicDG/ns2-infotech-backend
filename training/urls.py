@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import PageSectionList
+from .views import PageSectionTraining
 
 urlpatterns = [
-    path('fetch-training-page/', PageSectionList.as_view(), name='page-section-list'),
+    path('fetch-training-page/', PageSectionTraining.as_view(), name='page-section-list'),
 ]

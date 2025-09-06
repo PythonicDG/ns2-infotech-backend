@@ -9,7 +9,7 @@ class SectionContentInline(admin.StackedInline):
 
 
 class PageSectionAdmin(admin.ModelAdmin):
-    list_display = ['section_type', 'order', 'is_active', 'super_heading', 'heading', 'highlighted_heading']
+    list_display = ['section_type','submenu', 'order', 'is_active', 'super_heading', 'heading', 'highlighted_heading']
     list_filter = ['is_active', 'section_type']
     search_fields = ['heading', 'subheading', 'super_heading']
     ordering = ['order']
@@ -18,7 +18,7 @@ class PageSectionAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('section_type', 'order', 'is_active', 'super_heading', 'heading', 'highlighted_heading', 'subheading')
+            'fields': ('section_type', 'submenu', 'order', 'is_active', 'super_heading', 'heading', 'highlighted_heading', 'subheading')
         }),
         ('Images', {
             'fields': ('background_image', 'primary_image', 'overlay_title', 'overlay_description')
