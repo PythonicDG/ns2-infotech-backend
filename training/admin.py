@@ -30,18 +30,22 @@ class PageSectionAdmin(admin.ModelAdmin):
 
 
 class SectionContentAdmin(admin.ModelAdmin):
-    list_display = ['section', 'order', 'title', 'is_active', 'label']
+    list_display = ['section', 'order', 'title', 'is_active', 'label', 'linkedin_url', 'twitter_url', 'other_social_url']
     list_filter = ['is_active', 'section']
     search_fields = ['title', 'description', 'tags']
     ordering = ['section', 'order']
 
     fieldsets = (
         (None, {
-            'fields': ('section', 'order', 'is_active', 'label', 'title', 'description', 'tags', 'primary_button_text', 'primary_button_url')
+            'fields': (
+                'section', 'order', 'is_active', 'label', 'title', 'description', 'tags',
+                'primary_button_text', 'primary_button_url',
+                'linkedin_url', 'twitter_url', 'other_social_url',  # <--- Add here
+            )
         }),
         ('Icon', {
             'fields': ('icon',)
-        })
+        }),
     )
 
 
