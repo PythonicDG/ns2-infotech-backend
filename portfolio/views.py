@@ -21,9 +21,9 @@ class PortfolioSectionsAPIView(APIView):
         response = Response(serializer.data)
         end_time = time.time()
 
-        print(f"DB fetch time: {db_fetch_time - start_time:.3f}s")
-        print(f"Serialization time: {serialize_time - db_fetch_time:.3f}s")
-        print(f"Response build time: {end_time - serialize_time:.3f}s")
-        print(f"Total API time: {end_time - start_time:.3f}s")
+        logger.info(f"DB fetch time: {db_fetch_time - start_time:.3f}s")
+        logger.info(f"Serialization time: {serialize_time - db_fetch_time:.3f}s")
+        logger.info(f"Response build time: {end_time - serialize_time:.3f}s")
+        logger.info(f"Total API time: {end_time - start_time:.3f}s")
 
         return response
