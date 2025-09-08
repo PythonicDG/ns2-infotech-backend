@@ -5,7 +5,11 @@ from .models import PageSection, SectionContent
 class SectionContentInline(admin.StackedInline):
     model = SectionContent
     extra = 1
-    fields = ['order', 'is_active', 'icon', 'label', 'title', 'description', 'brochures', 'tags', 'primary_button_text', 'primary_button_url']
+    fields = [
+        'order', 'is_active', 'icon', 'label', 'title', 'description', 'brochures', 'tags',
+        'primary_button_text', 'primary_button_url',
+        'linkedin_url', 'twitter_url', 'other_social_url',
+    ]
 
 
 class PageSectionAdmin(admin.ModelAdmin):
@@ -40,7 +44,7 @@ class SectionContentAdmin(admin.ModelAdmin):
             'fields': (
                 'section', 'order', 'is_active', 'label', 'title', 'description', 'tags',
                 'primary_button_text', 'primary_button_url',
-                'linkedin_url', 'twitter_url', 'other_social_url',  # <--- Add here
+                'linkedin_url', 'twitter_url', 'other_social_url',
             )
         }),
         ('Icon', {
