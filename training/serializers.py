@@ -4,7 +4,7 @@ from .models import PageSection, SectionContent
 class SectionContentSerializer(serializers.ModelSerializer):
     class Meta:
         model = SectionContent
-        fields = ['id', 'order', 'is_active', 'icon', 'label', 'title', 'description', 'tags', 'primary_button_text', 'primary_button_url']
+        fields = ['id', 'order', 'is_active', 'icon', 'label', 'title', 'description', 'tags', 'primary_button_text', 'primary_button_url', 'linkedin_url','twitter_url','other_social_url' ]
 
 
 class PageSectionSerializer(serializers.ModelSerializer):
