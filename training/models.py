@@ -81,7 +81,10 @@ class SectionContent(models.Model):
     linkedin_url = models.CharField(max_length = 200, blank = True, null = True)
     twitter_url = models.CharField(max_length = 200, blank = True, null = True)
     other_social_url = models.CharField(max_length = 200, blank = True, null = True, help_text = "For Dribbble, Medium, etc.")
-
+    
+    question = models.CharField(max_length = 100, blank = True, null = True, help_text = "Add Question for Faq")
+    answer = models.CharField(max_length = 100, blank = True, null = True, help_text = "Add Answer for Faq")
+    
     class Meta:
         ordering = ['section', 'order']
 

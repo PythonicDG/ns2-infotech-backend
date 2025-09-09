@@ -8,7 +8,7 @@ class SectionContentInline(admin.StackedInline):
     fields = [
         'order', 'is_active', 'icon', 'label', 'title', 'description', 'brochures', 'tags',
         'primary_button_text', 'primary_button_url',
-        'linkedin_url', 'twitter_url', 'other_social_url',
+        'linkedin_url', 'twitter_url', 'other_social_url', 'question', 'answer'
     ]
 
 
@@ -44,7 +44,7 @@ class SectionContentAdmin(admin.ModelAdmin):
             'fields': (
                 'section', 'order', 'is_active', 'label', 'title', 'description', 'tags',
                 'primary_button_text', 'primary_button_url',
-                'linkedin_url', 'twitter_url', 'other_social_url',
+                'linkedin_url', 'twitter_url', 'other_social_url', 'question', 'answer'
             )
         }),
         ('Icon', {
