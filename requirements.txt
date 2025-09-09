@@ -2,8 +2,15 @@ asgiref==3.9.1
 Django==5.2.5
 django-cors-headers==4.7.0
 djangorestframework==3.16.1
+h11==0.16.0
+h2==4.3.0
+hpack==4.1.0
+Hypercorn==0.17.3
+hyperframe==6.1.0
 pillow==11.3.0
+priority==2.0.0
 psycopg2-binary==2.9.10
 python-decouple==3.8
 sqlparse==0.5.3
 tzdata==2025.2
+wsproto==1.2.0
