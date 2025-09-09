@@ -15,6 +15,7 @@ class PageSection(models.Model):
         ('INDUSTRIES_SERVED', 'Industries Served Section (Corporate)'),
         ('TRAINING_PROCESS', 'Training Process Section (Corporate)'),
         ('OUR_TRAINERS', 'Our Trainers Section'),
+        ('FAQ', 'Frequently Asked Questions'),
     ]
 
     section_type = models.CharField(max_length = 50, choices = SECTION_TYPES)
@@ -84,7 +85,7 @@ class SectionContent(models.Model):
     
     question = models.CharField(max_length = 100, blank = True, null = True, help_text = "Add Question for Faq")
     answer = models.CharField(max_length = 100, blank = True, null = True, help_text = "Add Answer for Faq")
-    
+
     class Meta:
         ordering = ['section', 'order']
 
