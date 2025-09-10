@@ -15,7 +15,7 @@ class PageSection(models.Model):
         ('INDUSTRIES_SERVED', 'Industries Served Section (Corporate)'),
         ('TRAINING_PROCESS', 'Training Process Section (Corporate)'),
         ('HERO_STUDENT', 'Hero Banner (Student)'),
-        ('TRAINING_OFFERINGS', 'Training Offerings Section (Student)'),
+        ('TRAINING_OFFERINGS_STUDENT', 'Training Offerings Section (Student)'),
         ('HIGHLIGHTS', 'Highlights (Student)'),
         ('PROGRAM_STRUCTURE', 'Program Structure (Student)'),
         ('WHAT_YOU_WILL_LEARN', 'What You Will Learn (Student)'),
