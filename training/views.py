@@ -12,11 +12,14 @@ class PageSectionTraining(APIView):
         slug = request.query_params.get('slug')
 
         if slug:
-            page_sections = PageSection.objects.filter(submenu__slug=slug, is_active=True).order_by('order')
+            page_sections = PageSection.objects.filter(submenu__slug=slug, is_active=True)
         else:
-            page_sections = PageSection.objects.filter(is_active=True).order_by('order')
+            page_sections = PageSection.objects.filter(is_active=True)
+
+        page_sections = page_sections.order_by('order', 'order_level')
 
         serializer = PageSectionSerializer(page_sections, many=True)
+
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])

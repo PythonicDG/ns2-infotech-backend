@@ -24,5 +24,5 @@ class PageSectionSerializer(serializers.ModelSerializer):
             'super_heading', 'heading', 'highlighted_heading', 'subheading',
             'background_image', 'primary_image', 'overlay_title', 'overlay_description',
             'primary_button_text', 'primary_button_url', 'secondary_button_text',
-            'secondary_button_url', 'content_items'
+            'secondary_button_url', 'content_items', 'order_level'
         ]

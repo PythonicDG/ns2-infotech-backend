@@ -32,7 +32,7 @@ class PageSection(models.Model):
     heading = models.CharField(max_length = 255, blank = True, null = True, help_text = "The main heading of the section.")
     highlighted_heading = models.CharField(max_length = 255, blank = True, null = True, help_text = "The part of the heading to be highlighted.")
     subheading = models.TextField(blank = True, null = True)
-
+    order_level = models.PositiveIntegerField(default = 0, null = True, blank = True)
     background_image = models.ImageField(upload_to = 'sections/', blank = True, null = True)
     primary_image = models.ImageField(upload_to = 'sections/', blank = True, null = True, help_text = "e.g., the photo in the 'About' section")
 
