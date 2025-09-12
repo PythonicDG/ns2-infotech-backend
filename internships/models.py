@@ -10,7 +10,8 @@ class PageSection(models.Model):
         ('INTERNSHIP_OPPORTUNITIES', 'Internship Opportunities Section'),
         ('WHY_CHOOSE_US', 'Why Choose Our Program Section'),
         ('FEATURE_HIGHLIGHTS', 'Feature Highlights Section'),
-        ('PROGRAM_STRUCTURE', 'Program Structure')
+        ('PROGRAM_STRUCTURE', 'Program Structure'),
+        ('FAQ', 'Faq')
     ]
 
     section_type = models.CharField(max_length=50, choices=SECTION_TYPES)
