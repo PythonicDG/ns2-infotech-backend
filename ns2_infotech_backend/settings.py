@@ -131,3 +131,5 @@ LOGGING = {
         'level': 'INFO',
     },
 }
+
+APPEND_SLASH = False
