@@ -1,3 +1,4 @@
+from django.contrib import admin
 from django.urls import path, include, re_path
 from django.shortcuts import redirect
 from django.conf import settings
