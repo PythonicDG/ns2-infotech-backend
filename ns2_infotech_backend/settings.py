@@ -1,5 +1,7 @@
 from pathlib import Path
 from decouple import config
+import dj_database_url
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -62,14 +64,11 @@ WSGI_APPLICATION = 'ns2_infotech_backend.wsgi.application'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME', default='ns2_db'),
-        'USER': config('DB_USER', default='ns2_user'),
-        'PASSWORD': config('DB_PASSWORD', default='StrongPassword123!'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='5432'),
-    }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL', default=f"postgres://{config('DB_USER', default='ns2_user')}:{config('DB_PASSWORD', default='StrongPassword123!')}@{config('DB_HOST', default='localhost')}:{config('DB_PORT', default='5432')}/{config('DB_NAME', default='ns2_db')}"),
+        conn_max_age=600,
+        ssl_require=not DEBUG
+    )
 }
 
 AUTH_PASSWORD_VALIDATORS = [
