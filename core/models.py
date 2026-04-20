@@ -7,6 +7,9 @@ from django.utils.text import slugify
 
 
 class Menu(models.Model):
+    """
+    Represents a top-level navigation menu item.
+    """
     text = models.CharField(max_length = 100)
     url = models.CharField(max_length = 200, blank = True, null = True)
     is_button = models.BooleanField(default = False)
@@ -18,6 +21,9 @@ class Menu(models.Model):
 
 
 class SubMenu(models.Model):
+    """
+    Represents a nested menu item belonging to a parent Menu.
+    """
     menu = models.ForeignKey(
         Menu, on_delete = models.CASCADE, related_name = 'submenus'
     )
@@ -37,6 +43,9 @@ class SubMenu(models.Model):
 
 
 class FooterSection(models.Model):
+    """
+    Represents a section in the website footer (e.g., Links, Contact).
+    """
     title = models.CharField(max_length = 100)
     order = models.PositiveIntegerField(default = 0)
     is_active = models.BooleanField(default = True)
@@ -87,6 +96,9 @@ class FooterSubscription(models.Model):
 
 
 class CompanyProfile(models.Model):
+    """
+    Stores core company information like logo, contact details, and copyright.
+    """
     name = models.CharField(max_length = 200)
     tagline = models.CharField(max_length = 300, blank = True, null = True)
     description = models.TextField()
