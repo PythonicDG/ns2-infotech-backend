@@ -49,3 +49,13 @@ The backend server for NS2 Infotech, built with Django and Django REST Framework
 
 ## Deployment
 The project is configured for deployment on Railway using the provided `railway.toml` and `Procfile`.
+
+## Contribution
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
+
+## License
+Distributed under the MIT License.
