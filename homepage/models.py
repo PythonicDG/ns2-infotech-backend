@@ -14,7 +14,7 @@ class PageSection(models.Model):
         ('OVERVIEW', 'Overview'),
         ('WHY_CHOOSE_US', 'Why Choose Us'),
         ('OUR_SERVICES', 'Our Services'),
-        ('KEY_ACHIVEMENTS', 'Key Achivements'),
+        ('OUR_PLACED_STUDENTS', 'Our Placed Students'),
         ('TESTIMONIALS', 'Testimonials Slider'),
         ('FAQ', 'Frequently Asked Questions'),
         ('CONTACT_US', 'Contact Us'),
@@ -47,21 +47,33 @@ class PageSection(models.Model):
         ordering = ['order']
 
     def __str__(self):
-        return f"{self.get_section_type_display()} for {self.content_object}"
+        try:
+            name = self.label or self.heading or f"ID: {self.id}"
+            return f"{self.get_section_type_display()} - {name}"
+        except Exception:
+            return f"PageSection {self.id}"
 
     def save(self, *args, **kwargs):
-        def convert_to_webp(image_field):
+        def process_image(image_field):
             if image_field and hasattr(image_field, 'file'):
-                image = PilImage.open(image_field.file)
-                image_io = io.BytesIO()
-                image.save(image_io, format = 'WEBP', quality = 85)
-                image_io.seek(0)
-                file_name = os.path.splitext(os.path.basename(image_field.name))[0]
-                new_file_name = f"{file_name}.webp"
-                image_field.save(new_file_name, ContentFile(image_io.read()), save = False)
+                # Check if the file is already a .webp to prevent re-processing
+                if not image_field.name.lower().endswith('.webp'):
+                    try:
+                        image = PilImage.open(image_field.file)
+                        # Handle RGBA to RGB for JPEG-like formats if needed, 
+                        # but WebP supports Alpha so we keep it.
+                        image_io = io.BytesIO()
+                        image.save(image_io, format = 'WEBP', quality = 85)
+                        image_io.seek(0)
+                        
+                        file_name = os.path.splitext(os.path.basename(image_field.name))[0]
+                        new_file_name = f"{file_name}.webp"
+                        image_field.save(new_file_name, ContentFile(image_io.read()), save = False)
+                    except Exception:
+                        pass
 
-        convert_to_webp(self.background_image)
-        convert_to_webp(self.primary_image)
+        process_image(self.background_image)
+        process_image(self.primary_image)
 
         super().save(*args, **kwargs)
 
@@ -84,19 +96,24 @@ class SectionContent(models.Model):
         ordering = ['section', 'order']
 
     def __str__(self):
-        return self.title or self.question or f"Content Item #{self.id}"
+        return self.title or self.question or self.label or f"Item #{self.id}"
 
     def save(self, *args, **kwargs):
-        def convert_to_webp(image_field):
+        def process_image(image_field):
             if image_field and hasattr(image_field, 'file'):
-                image = PilImage.open(image_field.file)
-                image_io = io.BytesIO()
-                image.save(image_io, format = 'WEBP', quality = 85)
-                image_io.seek(0)
-                file_name = os.path.splitext(os.path.basename(image_field.name))[0]
-                new_file_name = f"{file_name}.webp"
-                image_field.save(new_file_name, ContentFile(image_io.read()), save = False)
+                if not image_field.name.lower().endswith('.webp'):
+                    try:
+                        image = PilImage.open(image_field.file)
+                        image_io = io.BytesIO()
+                        image.save(image_io, format = 'WEBP', quality = 85)
+                        image_io.seek(0)
+                        
+                        file_name = os.path.splitext(os.path.basename(image_field.name))[0]
+                        new_file_name = f"{file_name}.webp"
+                        image_field.save(new_file_name, ContentFile(image_io.read()), save = False)
+                    except Exception:
+                        pass
 
-        convert_to_webp(self.icon)
+        process_image(self.icon)
 
         super().save(*args, **kwargs)
