@@ -20,6 +20,9 @@ def convert_to_webp(image_field):
 
 
 class PageSection(models.Model):
+    """
+    Represents a major section on the About Us page (e.g., Hero, Vision, Team).
+    """
     SECTION_TYPES = [
         ('HERO', 'Hero Section'),
         ('WHO_WE_ARE', 'Who We Are'),
@@ -59,6 +62,9 @@ class PageSection(models.Model):
 
 
 class SectionContent(models.Model):
+    """
+    Represents individual content items within a PageSection (e.g., team members, gallery images).
+    """
     section = models.ForeignKey(
         PageSection,
         related_name = 'content_items',
