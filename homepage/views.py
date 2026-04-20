@@ -5,11 +5,17 @@ from .serializers import PageSectionSerializer
 
 
 class HomepageSectionsAPIView(APIView):
-    def get(self, request, format = None):
-        sections = PageSection.objects.filter(is_active = True) \
+    """
+    API view to fetch all active homepage sections with their content items.
+    """
+    def get(self, request, format=None) -> Response:
+        """
+        Retrieves active page sections ordered by their sequence.
+        """
+        sections = PageSection.objects.filter(is_active=True) \
             .select_related('content_type') \
             .prefetch_related('content_items') \
             .order_by('order')
 
-        serializer = PageSectionSerializer(sections, many = True)
+        serializer = PageSectionSerializer(sections, many=True)
         return Response(serializer.data)
