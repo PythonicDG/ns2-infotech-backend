@@ -6,14 +6,18 @@ from .models import (
     FooterSection,
     FooterSubscription,
     CompanyProfile,
-    SocialLink
+    SocialLink,
+    SiteStatistic,
+    Announcement
 )
 from .serializers import (
     MenuSerializer,
     FooterSectionSerializer,
     FooterSubscriptionSerializer,
     CompanyProfileSerializer,
-    SocialLinkSerializer
+    SocialLinkSerializer,
+    SiteStatisticSerializer,
+    AnnouncementSerializer
 )
 
 from rest_framework.decorators import api_view
@@ -29,9 +33,14 @@ class HeaderFooterAPIView(APIView):
         company = CompanyProfile.objects.filter(is_active=True).first()
         social_links = SocialLink.objects.filter(is_active=True).order_by('platform')
 
+        stats = SiteStatistic.objects.filter(is_active=True).order_by('order')
+        announcements = Announcement.objects.filter(is_active=True).order_by('order')
+
         data = {
             "header": {
                 "menu": MenuSerializer(menus, many=True).data,
+                "announcements": AnnouncementSerializer(announcements, many=True).data,
+                "statistics": SiteStatisticSerializer(stats, many=True).data,
             },
             "footer": {
                 "sections": FooterSectionSerializer(sections, many=True).data,

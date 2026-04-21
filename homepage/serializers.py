@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import PageSection, SectionContent
-from core.models import SocialLink
+from core.models import SocialLink, Announcement, SiteStatistic
+from core.serializers import AnnouncementSerializer, SiteStatisticSerializer
 
 class SectionContentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,6 +23,8 @@ class PageSectionSerializer(serializers.ModelSerializer):
     content_items = SectionContentSerializer(many=True, read_only=True)
     section_type = serializers.CharField(source='get_section_type_display')
     social_links = serializers.SerializerMethodField()
+    announcements = serializers.SerializerMethodField()
+    statistics = serializers.SerializerMethodField()
 
     class Meta:
         model = PageSection
@@ -30,11 +33,23 @@ class PageSectionSerializer(serializers.ModelSerializer):
             'super_heading', 'heading', 'subheading', 'overview_text',
             'background_image', 'primary_image',
             'primary_button_text', 'primary_button_url', 'secondary_button_text', 'secondary_button_url',
-            'content_items', 'social_links'
+            'content_items', 'social_links', 'announcements', 'statistics'
         )
 
     def get_social_links(self, obj):
         if obj.section_type == 'CONTACT_US':
             links = SocialLink.objects.filter(is_active=True)
             return SocialLinkSerializer(links, many=True).data
+        return None
+
+    def get_announcements(self, obj):
+        if obj.section_type == 'HERO':
+            items = Announcement.objects.filter(is_active=True).order_by('order')
+            return AnnouncementSerializer(items, many=True).data
+        return None
+
+    def get_statistics(self, obj):
+        if obj.section_type == 'HERO':
+            items = SiteStatistic.objects.filter(is_active=True).order_by('order')
+            return SiteStatisticSerializer(items, many=True).data
         return None

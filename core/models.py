@@ -189,3 +189,29 @@ class ContactInfo(models.Model):
 
     def __str__(self):
         return "Contact Information"
+
+class SiteStatistic(models.Model):
+    icon = models.CharField(max_length=10, help_text="Emoji or icon shorthand")
+    value = models.CharField(max_length=100, help_text="e.g., 4.8/5 or 10,000+")
+    label = models.CharField(max_length=100, help_text="e.g., Rated or students trained")
+    sub_label = models.CharField(max_length=100, blank=True, null=True, help_text="e.g., by 2,000+ students")
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return f"{self.label} {self.value}"
+
+class Announcement(models.Model):
+    icon = models.CharField(max_length=10, help_text="Emoji or icon shorthand")
+    text = models.CharField(max_length=255)
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.text

@@ -5,7 +5,8 @@ from .models import (
     FooterSection,
     FooterItem,
     FooterSubscription,
-    CompanyProfile, SocialLink, ContactMessage, ContactInfo
+    CompanyProfile, SocialLink, ContactMessage, ContactInfo,
+    SiteStatistic, Announcement
 )
 
 
@@ -97,3 +98,15 @@ class ContactMessageAdmin(admin.ModelAdmin):
 class ContactInfoAdmin(admin.ModelAdmin):
     list_display = ('email', 'phone', 'working_hours')
     search_fields = ('email', 'phone')
+
+@admin.register(SiteStatistic)
+class SiteStatisticAdmin(admin.ModelAdmin):
+    list_display = ('icon', 'label', 'value', 'sub_label', 'order', 'is_active')
+    list_editable = ('order', 'is_active')
+    ordering = ('order',)
+
+@admin.register(Announcement)
+class AnnouncementAdmin(admin.ModelAdmin):
+    list_display = ('icon', 'text', 'order', 'is_active')
+    list_editable = ('order', 'is_active')
+    ordering = ('order',)

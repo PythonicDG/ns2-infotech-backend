@@ -6,7 +6,9 @@ from .models import (
     FooterItem,
     FooterSubscription,
     CompanyProfile,
-    SocialLink
+    SocialLink,
+    SiteStatistic,
+    Announcement
 )
 
 
@@ -58,10 +60,12 @@ class CompanyProfileSerializer(serializers.ModelSerializer):
         )
 
 
-class SocialLinkSerializer(serializers.ModelSerializer):
-    icon = serializers.ImageField(source='social_icon', read_only=True)
-    link = serializers.CharField(source='social_link')
-
+class SiteStatisticSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SocialLink
-        fields = ('platform', 'icon', 'link')
+        model = SiteStatistic
+        fields = ('icon', 'value', 'label', 'sub_label', 'order')
+
+class AnnouncementSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Announcement
+        fields = ('icon', 'text', 'order')
