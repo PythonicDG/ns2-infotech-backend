@@ -59,6 +59,14 @@ class CompanyProfileSerializer(serializers.ModelSerializer):
             'credits_text',
         )
 
+class SocialLinkSerializer(serializers.ModelSerializer):
+    icon = serializers.ImageField(source='social_icon', read_only=True)
+    link = serializers.CharField(source='social_link')
+
+    class Meta:
+        model = SocialLink
+        fields = ('platform', 'icon', 'link')
+
 
 class SiteStatisticSerializer(serializers.ModelSerializer):
     class Meta:
