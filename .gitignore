@@ -17,9 +17,9 @@ media/
 staticfiles/
 static/
 
-*/migrations/
-*/migrations/*.py
-*/migrations/*.pyc
+# Allow migrations but ignore compiled files
+**/migrations/__pycache__/
+**/migrations/*.pyc
 
 .env
 .env.*
