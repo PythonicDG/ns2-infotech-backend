@@ -13,9 +13,9 @@ class HomepageSectionsAPIView(APIView):
         Retrieves active page sections ordered by their sequence.
         """
         sections = PageSection.objects.filter(is_active=True) \
-            .select_related('content_type') \
+            .select_related('polymorphic_ctype') \
             .prefetch_related('content_items') \
             .order_by('order')
 
-        serializer = PageSectionSerializer(sections, many=True)
+        serializer = PageSectionSerializer(sections, many=True, context={'request': request})
         return Response(serializer.data)

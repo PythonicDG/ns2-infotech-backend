@@ -17,3 +17,4 @@ whitenoise==6.9.0
 wsproto==1.2.0
 dj-database-url==2.1.0
 gunicorn==23.0.0
+django-polymorphic==4.0
