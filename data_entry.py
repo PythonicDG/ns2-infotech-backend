@@ -84,7 +84,7 @@ def populate():
         section_type='OVERVIEW', order=2, content_type=company_ct, object_id=company.id,
         super_heading="WHY MIA?",
         heading="Bridging the Gap Between College and Industry",
-        overview_text="MIA was founded with a single mission: to create industry-ready engineers. Our labs are equipped with the latest technology from Siemens, Delta, and Allen Bradley to give you real-world exposure.",
+        overview_text="Hands-on training with Siemens, Delta, and Allen Bradley hardware.",
         primary_button_text="Learn More About Us", primary_button_url="/about"
     )
     SectionContent.objects.create(section=overview, text="Authorized Certification Provider", order=1)
