@@ -26,9 +26,13 @@ class PageSection(models.Model):
     SECTION_TYPES = [
         ('HERO', 'Hero Section'),
         ('WHO_WE_ARE', 'Who We Are'),
+        ('DIRECTOR_MESSAGE', 'Director / Founder Message'),
+        ('OUR_STORY', 'Our Story'),
         ('VISION_MISSION', 'Vision and Mission'),
-        ('GALLERY', 'Gallery'),
         ('EXPERTISE', 'Expertise'),
+        ('ACCREDITATIONS', 'Accreditations & Affiliations'),
+        ('INFRASTRUCTURE', 'Infrastructure Highlights'),
+        ('GALLERY', 'Gallery'),
         ('OUR_TEAM', 'Our Team'),
     ]
 
