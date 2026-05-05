@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import PageSection, SectionContent
+from .models import Module, PageSection, SectionContent
+
 
 class SectionContentInline(admin.StackedInline):
     model = SectionContent
@@ -11,10 +12,39 @@ class SectionContentInline(admin.StackedInline):
     )
     show_change_link = True
 
+
+class PageSectionInline(admin.StackedInline):
+    model = PageSection
+    extra = 0
+    fields = (
+        'section_type', 'order', 'is_active', 'heading', 'subheading',
+    )
+    show_change_link = True
+
+
+@admin.register(Module)
+class ModuleAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug', 'order', 'is_active', 'created_at')
+    list_filter = ('is_active',)
+    search_fields = ('title', 'tagline', 'slug')
+    ordering = ('order', 'title')
+    prepopulated_fields = {'slug': ('title',)}
+    inlines = [PageSectionInline]
+
+    fieldsets = (
+        (None, {
+            'fields': (
+                'title', 'tagline', 'slug', 'thumbnail',
+                'order', 'is_active',
+            ),
+        }),
+    )
+
+
 @admin.register(PageSection)
 class PageSectionAdmin(admin.ModelAdmin):
-    list_display = ('section_type', 'heading', 'order', 'is_active')
-    list_filter = ('section_type', 'is_active')
+    list_display = ('section_type', 'module', 'heading', 'order', 'is_active')
+    list_filter = ('section_type', 'is_active', 'module')
     search_fields = ('heading', 'highlighted_heading', 'subheading')
     ordering = ('order',)
     inlines = [SectionContentInline]
@@ -22,7 +52,7 @@ class PageSectionAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': (
-                'section_type', 'order', 'is_active',
+                'module', 'section_type', 'order', 'is_active',
                 'super_heading', 'heading', 'highlighted_heading', 'subheading',
                 'background_image', 'primary_image',
                 'overlay_title', 'overlay_description',
@@ -31,6 +61,7 @@ class PageSectionAdmin(admin.ModelAdmin):
             ),
         }),
     )
+
 
 @admin.register(SectionContent)
 class SectionContentAdmin(admin.ModelAdmin):

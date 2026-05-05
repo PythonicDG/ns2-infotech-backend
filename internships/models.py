@@ -3,6 +3,49 @@ import os
 from PIL import Image as PilImage
 from django.db import models
 from django.core.files.base import ContentFile
+from django.utils.text import slugify
+
+
+class Module(models.Model):
+    """
+    Represents a single module/course (e.g., PLC Programming, SCADA Systems).
+    Each module has a unique slug used for URL routing.
+    """
+    title = models.CharField(max_length=255, help_text="Module name, e.g., 'PLC Programming'")
+    tagline = models.CharField(max_length=500, blank=True, null=True, help_text="Short tagline for the module.")
+    slug = models.SlugField(unique=True, max_length=100, help_text="URL-friendly identifier, auto-generated from title.")
+    thumbnail = models.ImageField(upload_to='modules/thumbnails/', blank=True, null=True, help_text="Thumbnail image for listing cards.")
+    is_active = models.BooleanField(default=True)
+    order = models.PositiveIntegerField(default=0, help_text="Display order in listing pages.")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['order', 'title']
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+
+        def convert_to_webp(image_field):
+            if image_field and hasattr(image_field, 'file'):
+                try:
+                    image = PilImage.open(image_field.file)
+                    image_io = io.BytesIO()
+                    image.save(image_io, format='WEBP', quality=85)
+                    image_io.seek(0)
+                    file_name = os.path.splitext(os.path.basename(image_field.name))[0]
+                    new_file_name = f"{file_name}.webp"
+                    image_field.save(new_file_name, ContentFile(image_io.read()), save=False)
+                except Exception:
+                    pass
+
+        convert_to_webp(self.thumbnail)
+        super().save(*args, **kwargs)
+
 
 class PageSection(models.Model):
     SECTION_TYPES = [
@@ -11,8 +54,24 @@ class PageSection(models.Model):
         ('WHY_CHOOSE_US', 'Why Choose Our Program Section'),
         ('FEATURE_HIGHLIGHTS', 'Feature Highlights Section'),
         ('PROGRAM_STRUCTURE', 'Program Structure'),
-        ('FAQ', 'Faq')
+        ('FAQ', 'Faq'),
+        ('PAGE_BANNER', 'Page Banner'),
+        ('COURSE_OVERVIEW', 'Course Overview'),
+        ('KEY_HIGHLIGHTS', 'Key Highlights'),
+        ('SUBJECTS_COVERED', 'Subjects Covered'),
+        ('ELIGIBILITY_CRITERIA', 'Eligibility Criteria'),
+        ('FEES_BATCH_DETAILS', 'Fees & Batch Details'),
+        ('FACULTY', 'Faculty'),
+        ('PAST_RESULTS', 'Past Results'),
+        ('TESTIMONIALS', 'Testimonials'),
+        ('CTA', 'Call To Action'),
     ]
+
+    module = models.ForeignKey(
+        Module, related_name='sections', on_delete=models.CASCADE,
+        blank=True, null=True,
+        help_text="Link this section to a specific module. Leave blank for standalone internship page sections."
+    )
 
     section_type = models.CharField(max_length=50, choices=SECTION_TYPES)
     order = models.PositiveIntegerField(default=0)
@@ -38,18 +97,22 @@ class PageSection(models.Model):
         ordering = ['order']
 
     def __str__(self):
-        return f"{self.get_section_type_display()}"
+        module_label = f" ({self.module.title})" if self.module else ""
+        return f"{self.get_section_type_display()}{module_label}"
 
     def save(self, *args, **kwargs):
         def convert_to_webp(image_field):
             if image_field and hasattr(image_field, 'file'):
-                image = PilImage.open(image_field.file)
-                image_io = io.BytesIO()
-                image.save(image_io, format='WEBP', quality=85)
-                image_io.seek(0)
-                file_name = os.path.splitext(os.path.basename(image_field.name))[0]
-                new_file_name = f"{file_name}.webp"
-                image_field.save(new_file_name, ContentFile(image_io.read()), save=False)
+                try:
+                    image = PilImage.open(image_field.file)
+                    image_io = io.BytesIO()
+                    image.save(image_io, format='WEBP', quality=85)
+                    image_io.seek(0)
+                    file_name = os.path.splitext(os.path.basename(image_field.name))[0]
+                    new_file_name = f"{file_name}.webp"
+                    image_field.save(new_file_name, ContentFile(image_io.read()), save=False)
+                except Exception:
+                    pass
 
         if self.background_image:
             convert_to_webp(self.background_image)
@@ -88,13 +151,16 @@ class SectionContent(models.Model):
     def save(self, *args, **kwargs):
         def convert_to_webp(image_field):
             if image_field and hasattr(image_field, 'file'):
-                image = PilImage.open(image_field.file)
-                image_io = io.BytesIO()
-                image.save(image_io, format = 'WEBP', quality = 85)
-                image_io.seek(0)
-                file_name = os.path.splitext(os.path.basename(image_field.name))[0]
-                new_file_name = f"{file_name}.webp"
-                image_field.save(new_file_name, ContentFile(image_io.read()), save = False)
+                try:
+                    image = PilImage.open(image_field.file)
+                    image_io = io.BytesIO()
+                    image.save(image_io, format = 'WEBP', quality = 85)
+                    image_io.seek(0)
+                    file_name = os.path.splitext(os.path.basename(image_field.name))[0]
+                    new_file_name = f"{file_name}.webp"
+                    image_field.save(new_file_name, ContentFile(image_io.read()), save = False)
+                except Exception:
+                    pass
 
         if self.icon:
             convert_to_webp(self.icon)
