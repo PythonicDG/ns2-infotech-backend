@@ -11,22 +11,22 @@ def populate_modules():
     print("🚀 Starting Module Detail Page Data Entry...")
 
     # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    # MODULE 1: PLC Programming
+    # MODULE 1: PLC & SCADA Training
     # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    print("📦 Creating Module: PLC Programming...")
+    print("📦 Creating Module: PLC & SCADA Training...")
     plc = Module.objects.create(
-        title="PLC Programming",
-        tagline="Master Programmable Logic Controllers from basics to advanced industrial applications.",
-        slug="plc-programming",
+        title="PLC & SCADA Training",
+        tagline="Master PLC Programming and SCADA Systems from basics to advanced industrial applications.",
+        slug="plc-scada-training",
         order=1,
     )
 
     # PAGE_BANNER
     PageSection.objects.create(
         module=plc, section_type='PAGE_BANNER', order=1,
-        heading="PLC Programming",
+        heading="PLC & SCADA Training",
         highlighted_heading="Master Course",
-        subheading="Become a certified PLC programmer with hands-on training on Siemens, Allen Bradley, and Mitsubishi hardware. Industry-ready curriculum designed by automation experts.",
+        subheading="Become a certified automation engineer with hands-on training on Siemens, Allen Bradley, and Mitsubishi hardware. Industry-ready curriculum designed by experts.",
         primary_button_text="Enroll Now", primary_button_url="/contact",
         secondary_button_text="Download Brochure", secondary_button_url="#brochure",
     )
@@ -380,6 +380,113 @@ def populate_modules():
         SectionContent.objects.create(section=faq3, order=i, question=q, answer=a)
 
     print(f"  ✅ Industrial Robotics module created with {robotics.sections.count()} sections")
+
+    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # MODULE 4: EPLAN Designing
+    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    print("📦 Creating Module: EPLAN Designing...")
+    eplan = Module.objects.create(
+        title='EPLAN Designing',
+        tagline='Learn professional electrical panel designing with EPLAN software.',
+        slug='eplan-designing',
+        order=4,
+    )
+
+    # PAGE_BANNER
+    PageSection.objects.create(
+        module=eplan, section_type='PAGE_BANNER', order=1,
+        heading='EPLAN Designing',
+        highlighted_heading='Professional Course',
+        subheading='Master industrial electrical panel design, schematic creation, and documentation using EPLAN Electric P8 — the global standard in electrical engineering.',
+        primary_button_text='Enroll Now', primary_button_url='/contact',
+        secondary_button_text='Download Brochure', secondary_button_url='#brochure',
+    )
+
+    # COURSE_OVERVIEW
+    ov = PageSection.objects.create(
+        module=eplan, section_type='COURSE_OVERVIEW', order=2,
+        super_heading='COURSE OVERVIEW',
+        heading='Learn Professional',
+        highlighted_heading='Electrical Design',
+        subheading='EPLAN Electric P8 is the industry standard for electrical engineering design. This course covers schematic creation, panel layout, cable planning, PLC assignment, and automated report generation.',
+        overlay_title='Industry-Standard Software',
+        overlay_description='Train on licensed EPLAN Electric P8 software.',
+    )
+    SectionContent.objects.create(section=ov, order=1, title='Schematic Design', description='Create single-line and multi-line circuit diagrams.')
+    SectionContent.objects.create(section=ov, order=2, title='Panel Layout Design', description='2D and 3D panel layouts with copper bar routing.')
+    SectionContent.objects.create(section=ov, order=3, title='PLC Auto-Connection', description='Automated PLC I/O assignment and wiring.')
+    SectionContent.objects.create(section=ov, order=4, title='Report Generation', description='BOMs, cable lists, terminal diagrams, and wire labels.')
+
+    # KEY_HIGHLIGHTS
+    h = PageSection.objects.create(
+        module=eplan, section_type='KEY_HIGHLIGHTS', order=3,
+        super_heading='KEY HIGHLIGHTS',
+        heading='Course Highlights',
+        subheading='What makes our EPLAN course the preferred choice.',
+    )
+    SectionContent.objects.create(section=h, order=1, title='Licensed Software', description='Train on genuine EPLAN Electric P8 licenses.')
+    SectionContent.objects.create(section=h, order=2, title='Real Project Work', description='Design actual industrial panel projects.')
+    SectionContent.objects.create(section=h, order=3, title='Industry Standards', description='Learn IEC 61346 and EN 81346 standards.')
+    SectionContent.objects.create(section=h, order=4, title='Placement Support', description='100% placement assistance for EPLAN designers.')
+
+    # SUBJECTS_COVERED
+    s = PageSection.objects.create(
+        module=eplan, section_type='SUBJECTS_COVERED', order=4,
+        super_heading='CURRICULUM',
+        heading='Topics Covered',
+    )
+    for i, (t, d) in enumerate([
+        ('EPLAN Interface & Project Setup', 'Workspace configuration, project structure, and navigation.'),
+        ('Symbol Library & Macros', 'Standard symbols, custom macros, and component libraries.'),
+        ('Schematic Drawing', 'Circuit diagrams, cross-references, and connection points.'),
+        ('PLC Configuration', 'PLC cards, addressing, and automatic connection generation.'),
+        ('Panel Layout (2D)', 'Component placement, mounting rails, and cable ducts.'),
+        ('3D Panel Design', 'EPLAN Pro Panel for 3D visualization and copper routing.'),
+        ('Cable & Wire Planning', 'Cable routing, wire numbering, and harness design.'),
+        ('Report Generation', 'BOM, terminal diagrams, cable lists, and label printing.'),
+    ], 1):
+        SectionContent.objects.create(section=s, order=i, title=t, description=d)
+
+    # FEES_BATCH_DETAILS
+    f = PageSection.objects.create(
+        module=eplan, section_type='FEES_BATCH_DETAILS', order=5,
+        super_heading='PRICING',
+        heading='Fees & Schedule',
+        primary_button_text='Reserve Your Seat', primary_button_url='/contact',
+    )
+    SectionContent.objects.create(section=f, order=1, label='Fee', title='Rs 30,000', description='Inclusive of software access and certification.')
+    SectionContent.objects.create(section=f, order=2, label='Duration', title='2 Months', description='Weekday and weekend batches available.')
+    SectionContent.objects.create(section=f, order=3, label='Next Batch', title='20th June 2026', description='Limited seats — register early.')
+    SectionContent.objects.create(section=f, order=4, label='Seats', title='10 Left', description='Small batch for individual attention.')
+
+    # TESTIMONIALS
+    t = PageSection.objects.create(
+        module=eplan, section_type='TESTIMONIALS', order=6,
+        heading='Student Reviews',
+    )
+    SectionContent.objects.create(section=t, order=1, title='Excellent EPLAN Training', description='The project-based approach helped me land a job as an EPLAN designer at a German MNC.', question='Saurabh More', answer='Placed at Rittal India')
+    SectionContent.objects.create(section=t, order=2, title='Industry Ready Skills', description='I learned not just the software but also industrial standards and best practices.', question='Pooja Jadhav', answer='Placed at Schneider Electric')
+
+    # CTA
+    PageSection.objects.create(
+        module=eplan, section_type='CTA', order=7,
+        heading='Start Your EPLAN Design Career',
+        subheading='Become a certified EPLAN designer and unlock opportunities in electrical engineering.',
+        primary_button_text='CALL NOW', primary_button_url='tel:+919075102234',
+        secondary_button_text='Enquire Online', secondary_button_url='/contact',
+        overlay_title='Phone', overlay_description='+91 90751 02234',
+    )
+
+    # FAQ
+    faq = PageSection.objects.create(
+        module=eplan, section_type='FAQ', order=8,
+        heading='Frequently Asked Questions',
+    )
+    SectionContent.objects.create(section=faq, order=1, question='Do I need prior CAD experience?', answer='No, we start from basics. Knowledge of electrical circuits is helpful but not mandatory.')
+    SectionContent.objects.create(section=faq, order=2, question='Which version of EPLAN is used?', answer='We use the latest EPLAN Electric P8 version with genuine licenses.')
+    SectionContent.objects.create(section=faq, order=3, question='What job roles can I get?', answer='EPLAN Designer, Electrical Design Engineer, Panel Design Engineer, Control Panel Designer.')
+
+    print(f"  ✅ EPLAN Designing module created with {eplan.sections.count()} sections")
 
     # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     # SUMMARY
