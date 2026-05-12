@@ -35,6 +35,7 @@ class ModuleAdmin(admin.ModelAdmin):
         (None, {
             'fields': (
                 'title', 'tagline', 'slug', 'thumbnail',
+                'brochure', 'syllabus',
                 'order', 'is_active',
             ),
         }),
