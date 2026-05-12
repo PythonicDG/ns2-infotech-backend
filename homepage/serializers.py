@@ -25,6 +25,7 @@ class PageSectionSerializer(serializers.ModelSerializer):
     social_links = serializers.SerializerMethodField()
     announcements = serializers.SerializerMethodField()
     statistics = serializers.SerializerMethodField()
+    company_address = serializers.SerializerMethodField()
 
     class Meta:
         model = PageSection
@@ -33,8 +34,13 @@ class PageSectionSerializer(serializers.ModelSerializer):
             'super_heading', 'heading', 'subheading', 'overview_text',
             'background_image', 'primary_image',
             'primary_button_text', 'primary_button_url', 'secondary_button_text', 'secondary_button_url',
-            'content_items', 'social_links', 'announcements', 'statistics'
+            'content_items', 'social_links', 'announcements', 'statistics', 'company_address'
         )
+
+    def get_company_address(self, obj):
+        if obj.section_type == 'CONTACT_US' and hasattr(obj.content_object, 'address'):
+            return obj.content_object.address
+        return None
 
     def get_social_links(self, obj):
         if obj.section_type == 'CONTACT_US':
