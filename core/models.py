@@ -111,6 +111,7 @@ class CompanyProfile(models.Model):
     email = models.EmailField(blank = True, null = True)
     phone = models.CharField(max_length = 20, blank = True, null = True)
     address = models.TextField(blank = True, null = True)
+    google_maps_url = models.URLField(max_length = 500, blank = True, null = True, help_text="Google Maps Embed URL")
     is_active = models.BooleanField(default = True)
     copyright_text = models.CharField(
         max_length = 200, blank = True, null = True
