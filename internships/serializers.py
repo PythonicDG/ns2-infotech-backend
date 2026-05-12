@@ -32,7 +32,7 @@ class ModuleListSerializer(serializers.ModelSerializer):
     """Lightweight serializer for module listing pages."""
     class Meta:
         model = Module
-        fields = ['id', 'title', 'tagline', 'slug', 'thumbnail', 'is_active', 'order']
+        fields = ['id', 'title', 'tagline', 'slug', 'thumbnail', 'is_active', 'order', 'brochure', 'syllabus']
 
 
 class ModuleDetailSerializer(serializers.ModelSerializer):
@@ -41,7 +41,7 @@ class ModuleDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Module
-        fields = ['id', 'title', 'tagline', 'slug', 'thumbnail', 'is_active', 'sections']
+        fields = ['id', 'title', 'tagline', 'slug', 'thumbnail', 'is_active', 'sections', 'brochure', 'syllabus']
 
     def get_sections(self, obj):
         active_sections = obj.sections.filter(is_active=True).prefetch_related('content_items').order_by('order')

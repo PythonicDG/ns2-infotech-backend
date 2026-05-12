@@ -19,6 +19,8 @@ class Module(models.Model):
     order = models.PositiveIntegerField(default=0, help_text="Display order in listing pages.")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    brochure = models.FileField(upload_to='modules/brochures/', blank=True, null=True, help_text="Downloadable PDF brochure for the module.")
+    syllabus = models.FileField(upload_to='modules/syllabus/', blank=True, null=True, help_text="Downloadable PDF syllabus for the module.")
 
     class Meta:
         ordering = ['order', 'title']
