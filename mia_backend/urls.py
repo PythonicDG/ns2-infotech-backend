@@ -12,10 +12,7 @@ urlpatterns = [
 
     path('api/core/', include('core.urls')),
     path('api/homepage/', include('homepage.urls')),
-    path('api/services/', include('services.urls')),
     path('api/modules/', include('modules.urls')),
-    path('api/training/', include('training.urls')),
-    path('api/portfolio/', include('portfolio.urls')),
     path('api/contact/', include('contact.urls')),
     path('api/aboutus/', include('aboutus.urls')),
 
