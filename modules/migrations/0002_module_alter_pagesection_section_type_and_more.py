@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('internships', '0001_initial'),
+        ('modules', '0001_initial'),
     ]
 
     operations = [
@@ -36,6 +36,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='pagesection',
             name='module',
-            field=models.ForeignKey(blank=True, help_text='Link this section to a specific module. Leave blank for standalone internship page sections.', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='sections', to='internships.module'),
+            field=models.ForeignKey(blank=True, help_text='Link this section to a specific module. Leave blank for standalone internship page sections.', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='sections', to='modules.module'),
         ),
     ]

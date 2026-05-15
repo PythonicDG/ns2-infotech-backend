@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
                 ('primary_button_url', models.CharField(blank=True, max_length=200, null=True)),
                 ('question', models.CharField(blank=True, help_text='Add Question for Faq', max_length=500, null=True)),
                 ('answer', models.CharField(blank=True, help_text='Add Answer for Faq', max_length=500, null=True)),
-                ('section', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='content_items', to='internships.pagesection')),
+                ('section', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='content_items', to='modules.pagesection')),
             ],
             options={
                 'ordering': ['section', 'order'],

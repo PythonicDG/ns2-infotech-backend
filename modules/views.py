@@ -7,7 +7,7 @@ from .serializers import PageSectionSerializer, ModuleListSerializer, ModuleDeta
 
 
 class PageSectionsAPIView(APIView):
-    """Fetch all active internship page sections (standalone, no module)."""
+    """Fetch all active module page sections (standalone, no module)."""
     def get(self, request):
         sections = PageSection.objects.filter(
             is_active=True, module__isnull=True

@@ -1,6 +1,6 @@
-# NS2 Infotech Backend
+# MIA Backend
 
-The backend server for NS2 Infotech, built with Django and Django REST Framework.
+The backend server for MIA (Modern Institute of Automation), built with Django and Django REST Framework.
 
 ## Features
 - Scalable Django architecture
@@ -20,7 +20,7 @@ The backend server for NS2 Infotech, built with Django and Django REST Framework
 1. **Clone the repository:**
    ```bash
    git clone <repository-url>
-   cd ns2-infotech-backend
+   cd mia_backend
    ```
 
 2. **Create and activate a virtual environment:**

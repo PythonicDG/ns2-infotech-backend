@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'core',
     'homepage',
     'services',
-    'internships',
+    'modules',
     'training',
     'portfolio',
     'contact',
@@ -59,13 +59,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'ns2_infotech_backend.urls'
-WSGI_APPLICATION = 'ns2_infotech_backend.wsgi.application'
+ROOT_URLCONF = 'mia_backend.urls'
+WSGI_APPLICATION = 'mia_backend.wsgi.application'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE_URL', default=f"postgres://{config('DB_USER', default='ns2_user')}:{config('DB_PASSWORD', default='StrongPassword123!')}@{config('DB_HOST', default='localhost')}:{config('DB_PORT', default='5432')}/{config('DB_NAME', default='ns2_db')}"),
+        default=config('DATABASE_URL', default=f"postgres://{config('DB_USER', default='mia_user')}:{config('DB_PASSWORD', default='StrongPassword123!')}@{config('DB_HOST', default='localhost')}:{config('DB_PORT', default='5432')}/{config('DB_NAME', default='mia_db')}"),
         conn_max_age=600,
         ssl_require=not DEBUG
     )

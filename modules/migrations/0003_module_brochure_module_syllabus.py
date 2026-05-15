@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('internships', '0002_module_alter_pagesection_section_type_and_more'),
+        ('modules', '0002_module_alter_pagesection_section_type_and_more'),
     ]
 
     operations = [

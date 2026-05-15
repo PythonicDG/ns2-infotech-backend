@@ -1,10 +1,10 @@
 import os
 import django
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ns2_infotech_backend.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mia_backend.settings')
 django.setup()
 
-from internships.models import Module, PageSection, SectionContent
+from modules.models import Module, PageSection, SectionContent
 
 
 def populate_modules():
@@ -294,7 +294,7 @@ def populate_modules():
     for i, (q, a) in enumerate([
         ("Is PLC knowledge required before SCADA training?", "Basic PLC knowledge is recommended but not mandatory. We cover PLC-SCADA integration from scratch."),
         ("Which SCADA software will I learn?", "You will learn Siemens WinCC, Wonderware InTouch, and Rockwell FactoryTalk View SE."),
-        ("Do I get a certificate?", "Yes, you receive an industry-recognized certification from NS-2 Infotech upon completion."),
+        ("Do I get a certificate?", "Yes, you receive an industry-recognized certification from MIA upon completion."),
         ("What are the job roles after this course?", "SCADA Engineer, Control Room Operator, SCADA Developer, Automation Engineer."),
     ], 1):
         SectionContent.objects.create(section=faq2, order=i, question=q, answer=a)
@@ -506,10 +506,10 @@ def populate_modules():
     print(f"   /modules/scada-systems/")
     print(f"   /modules/industrial-robotics/")
     print(f"\n🔗 API Endpoints:")
-    print(f"   GET /api/internships/modules/")
-    print(f"   GET /api/internships/modules/plc-programming/")
-    print(f"   GET /api/internships/modules/scada-systems/")
-    print(f"   GET /api/internships/modules/industrial-robotics/")
+    print(f"   GET /api/modules/modules/")
+    print(f"   GET /api/modules/modules/plc-programming/")
+    print(f"   GET /api/modules/modules/scada-systems/")
+    print(f"   GET /api/modules/modules/industrial-robotics/")
 
 
 if __name__ == '__main__':

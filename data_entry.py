@@ -2,7 +2,7 @@ import os
 import django
 
 # Setup Django environment
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ns2_infotech_backend.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mia_backend.settings')
 django.setup()
 
 from django.contrib.contenttypes.models import ContentType

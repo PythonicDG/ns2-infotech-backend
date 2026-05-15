@@ -2,7 +2,7 @@ import os
 import django
 from pathlib import Path
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ns2_infotech_backend.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mia_backend.settings')
 django.setup()
 
 from aboutus.models import PageSection, SectionContent
@@ -21,7 +21,7 @@ def populate_aboutus():
         is_active=True,
         super_heading='ABOUT US',
         heading='Empowering Future Automation Experts',
-        subheading='NS-2 Infotech is committed to bridging the gap between industry demands and skilled professionals through cutting-edge automation training.',
+        subheading='Modern Institute of Automation (MIA) is committed to bridging the gap between industry demands and skilled professionals through cutting-edge automation training.',
         primary_button_text='Get In Touch',
         primary_button_url='#contact',
     )
@@ -33,9 +33,9 @@ def populate_aboutus():
         order=2,
         is_active=True,
         super_heading='WHO WE ARE',
-        heading='About NS-2 Infotech',
+        heading='About Modern Institute of Automation (MIA)',
         subheading='Modern Institute of Automation',
-        overview_text='Founded in 2018, NS-2 Infotech has trained 5000+ students across PLC, SCADA, DCS, and Industrial Automation domains. We are dedicated to providing industry-aligned training with 100% placement support.',
+        overview_text='Founded in 2018, MIA has trained 5000+ students across PLC, SCADA, DCS, and Industrial Automation domains. We are dedicated to providing industry-aligned training with 100% placement support.',
     )
     # Note: primary_image='sections/who-we-are.webp' - file not found, skipping
     SectionContent.objects.create(section=who_we_are, order=1, label='Industry-Aligned Curriculum')
@@ -51,14 +51,14 @@ def populate_aboutus():
         super_heading='LEADERSHIP',
         heading='Message from the Director',
         subheading='Mr. John Doe',
-        overview_text='Founder & Director, NS-2 Infotech',
+        overview_text='Founder & Director, MIA',
     )
     # Note: primary_image='sections/director-photo.webp' - file not found, skipping
     SectionContent.objects.create(
         section=director_message,
         order=1,
         label='Director Message',
-        description='When I founded NS-2 Infotech, my vision was clear — to create an institution that doesn\'t just teach, but transforms lives. Every student who walks through our doors carries a dream, and we take the responsibility of nurturing that dream very seriously.\n\nOur curriculum is designed in collaboration with industry leaders to ensure our students are job-ready from day one. We believe in learning by doing, and our state-of-the-art labs reflect that commitment.\n\nI invite you to be part of this journey. Together, let\'s build the future of automation.'
+        description='When I founded MIA, my vision was clear — to create an institution that doesn\'t just teach, but transforms lives. Every student who walks through our doors carries a dream, and we take the responsibility of nurturing that dream very seriously.\n\nOur curriculum is designed in collaboration with industry leaders to ensure our students are job-ready from day one. We believe in learning by doing, and our state-of-the-art labs reflect that commitment.\n\nI invite you to be part of this journey. Together, let\'s build the future of automation.'
     )
 
     # OUR_STORY Section
@@ -67,10 +67,10 @@ def populate_aboutus():
         order=4,
         is_active=True,
         super_heading='OUR JOURNEY',
-        heading='The NS-2 Infotech Story',
+        heading='The MIA Story',
         subheading='From a small training center to a leading automation institute — here\'s how we grew.',
     )
-    SectionContent.objects.create(section=our_story, order=1, label='2018', title='The Beginning', description='NS-2 Infotech was founded with a mission to provide quality automation training to aspiring engineers. Started with just 2 courses and 15 students.')
+    SectionContent.objects.create(our_story, order=1, label='2018', title='The Beginning', description='MIA was founded with a mission to provide quality automation training to aspiring engineers. Started with just 2 courses and 15 students.')
     SectionContent.objects.create(section=our_story, order=2, label='2019', title='First Placement Batch', description='Successfully placed our first batch of 30 students in top automation companies. Expanded our course catalog to 6 specialized programs.')
     SectionContent.objects.create(section=our_story, order=3, label='2021', title='Infrastructure Expansion', description='Moved to a larger campus with dedicated PLC & SCADA labs, a digital library, and modern classrooms to support growing student enrollment.')
     SectionContent.objects.create(section=our_story, order=4, label='2023', title='1000+ Students Placed', description='Crossed the milestone of 1000+ successful placements. Partnered with 50+ companies for campus recruitment drives.')
@@ -137,10 +137,10 @@ def populate_aboutus():
         section_type='GALLERY',
         order=9,
         is_active=True,
-        super_heading='LIFE AT NS-2',
+        super_heading='LIFE AT MIA',
         heading='Campus Gallery',
         subheading='Our vibrant campus in pictures',
-        overview_text='Experience the energy and enthusiasm that defines life at NS-2 Infotech.',
+        overview_text='Experience the energy and enthusiasm that defines life at MIA.',
     )
     # Note: primary_image='sections/campus-banner.webp' - file not found, skipping
     SectionContent.objects.create(section=gallery, order=1, label='Training Session')

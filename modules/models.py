@@ -24,6 +24,7 @@ class Module(models.Model):
 
     class Meta:
         ordering = ['order', 'title']
+        db_table = 'internships_module'
 
     def __str__(self):
         return self.title
@@ -52,7 +53,7 @@ class Module(models.Model):
 class PageSection(models.Model):
     SECTION_TYPES = [
         ('HERO', 'Hero Banner'),
-        ('INTERNSHIP_OPPORTUNITIES', 'Internship Opportunities Section'),
+        ('MODULE_OPPORTUNITIES', 'Module Opportunities Section'),
         ('WHY_CHOOSE_US', 'Why Choose Our Program Section'),
         ('FEATURE_HIGHLIGHTS', 'Feature Highlights Section'),
         ('PROGRAM_STRUCTURE', 'Program Structure'),
@@ -72,7 +73,7 @@ class PageSection(models.Model):
     module = models.ForeignKey(
         Module, related_name='sections', on_delete=models.CASCADE,
         blank=True, null=True,
-        help_text="Link this section to a specific module. Leave blank for standalone internship page sections."
+        help_text="Link this section to a specific module. Leave blank for standalone module page sections."
     )
 
     section_type = models.CharField(max_length=50, choices=SECTION_TYPES)
@@ -100,6 +101,7 @@ class PageSection(models.Model):
 
     class Meta:
         ordering = ['order']
+        db_table = 'internships_pagesection'
 
     def __str__(self):
         module_label = f" ({self.module.title})" if self.module else ""
@@ -149,6 +151,7 @@ class SectionContent(models.Model):
 
     class Meta:
         ordering = ['section', 'order']
+        db_table = 'internships_sectioncontent'
 
     def __str__(self):
         return self.title or f"Content Item for {self.section}"
