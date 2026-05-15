@@ -26,6 +26,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'ordering': ['order', 'title'],
+                'db_table': 'internships_module',
             },
         ),
         migrations.AlterField(

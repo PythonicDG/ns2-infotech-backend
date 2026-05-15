@@ -34,6 +34,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'ordering': ['order'],
+                'db_table': 'internships_pagesection',
             },
         ),
         migrations.CreateModel(
@@ -56,6 +57,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'ordering': ['section', 'order'],
+                'db_table': 'internships_sectioncontent',
             },
         ),
     ]
