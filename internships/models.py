@@ -95,6 +95,9 @@ class PageSection(models.Model):
     secondary_button_text = models.CharField(max_length=50, blank=True, null=True)
     secondary_button_url = models.CharField(max_length=200, blank=True, null=True)
 
+    brochure = models.FileField(upload_to='sections/brochures/', blank=True, null=True, help_text="Downloadable PDF brochure for this section.")
+    syllabus = models.FileField(upload_to='sections/syllabus/', blank=True, null=True, help_text="Downloadable PDF syllabus for this section.")
+
     class Meta:
         ordering = ['order']
 

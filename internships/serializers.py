@@ -41,7 +41,7 @@ class ModuleDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Module
-        fields = ['id', 'title', 'tagline', 'slug', 'thumbnail', 'is_active', 'sections', 'brochure', 'syllabus']
+        fields = ['id', 'title', 'tagline', 'slug', 'thumbnail', 'is_active', 'order', 'created_at','brochure', 'syllabus', 'sections']
 
     def get_sections(self, obj):
         active_sections = obj.sections.filter(is_active=True).prefetch_related('content_items').order_by('order')
