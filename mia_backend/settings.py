@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'homepage',
     'modules',
     'contact',
-    'aboutus'
+    'aboutus',
+    'announcements'
 ]
 
 MIDDLEWARE = [
@@ -89,6 +90,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 CORS_ALLOWED_ORIGINS = [o for o in config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000,http://localhost:8000').split(',') if o]
 CSRF_TRUSTED_ORIGINS = [o for o in config('CSRF_TRUSTED_ORIGINS', default='http://localhost:3000,http://localhost:8000').split(',') if o.startswith('http')]
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
