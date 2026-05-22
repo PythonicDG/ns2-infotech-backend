@@ -5,6 +5,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
 
+from .admin_views import GenericAdminCRUDView
+
 urlpatterns = [
     path('', lambda request: redirect('admin/')),
 
@@ -16,8 +18,7 @@ urlpatterns = [
     path('api/contact/', include('contact.urls')),
     path('api/aboutus/', include('aboutus.urls')),
     path('api/announcements/', include('announcements.urls')),
-
-
+    path('api/admin-crud/', GenericAdminCRUDView.as_view(), name='admin-crud'),
 ]
 
 urlpatterns += [
