@@ -32,7 +32,7 @@ class PageSection(models.Model):
     super_heading = models.CharField(max_length = 200, blank = True, null = True)
     heading = models.CharField(max_length = 255, blank = True, null = True)
     subheading = models.TextField(blank = True, null = True)
-    overview_text = models.CharField(max_length = 100, blank = True, null = True)
+    overview_text = models.TextField(blank = True, null = True)
 
     background_image = models.ImageField(upload_to = 'sections/', blank = True, null = True)
     primary_image = models.ImageField(upload_to = 'sections/', blank = True, null = True)

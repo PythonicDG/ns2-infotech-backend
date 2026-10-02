@@ -20,7 +20,7 @@ class SocialLinkSerializer(serializers.ModelSerializer):
         fields = ('platform', 'icon', 'url')
 
 class PageSectionSerializer(serializers.ModelSerializer):
-    content_items = SectionContentSerializer(many=True, read_only=True)
+    content_items = serializers.SerializerMethodField()
     section_type = serializers.CharField(source='get_section_type_display')
     social_links = serializers.SerializerMethodField()
     announcements = serializers.SerializerMethodField()
@@ -37,6 +37,14 @@ class PageSectionSerializer(serializers.ModelSerializer):
             'primary_button_text', 'primary_button_url', 'secondary_button_text', 'secondary_button_url',
             'content_items', 'social_links', 'announcements', 'statistics', 'company_address', 'map_url'
         )
+
+    def get_content_items(self, obj):
+        # The view prefetches the public, ordered items into this attribute so
+        # inactive/admin draft rows never inflate the homepage response.
+        items = getattr(obj, 'active_content_items', None)
+        if items is None:
+            items = obj.content_items.filter(is_active=True).order_by('order')
+        return SectionContentSerializer(items, many=True, context=self.context).data
 
     def get_company_address(self, obj):
         if obj.section_type == 'CONTACT_US' and hasattr(obj.content_object, 'address'):

@@ -2,6 +2,9 @@ from pathlib import Path
 from decouple import config
 import dj_database_url
 import os
+import mimetypes
+
+mimetypes.add_type('image/webp', '.webp')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
