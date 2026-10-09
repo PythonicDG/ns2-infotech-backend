@@ -12,6 +12,27 @@ class SectionContentInline(admin.StackedInline):
     ordering = ('order',)
 
 
+class PartnerContentInline(admin.StackedInline):
+    model = SectionContent
+    verbose_name = 'Partner'
+    verbose_name_plural = 'Partners (add as many as needed)'
+    extra = 1
+    fields = ('title', 'icon', 'description', 'order', 'is_active')
+    ordering = ('order', 'pk')
+
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        field = super().formfield_for_dbfield(db_field, request, **kwargs)
+        if db_field.name == 'title':
+            field.label = 'Partner name / logo alternative text'
+            field.required = True
+        elif db_field.name == 'icon':
+            field.label = 'Partner logo'
+            field.help_text = 'Upload a PNG, WebP or JPEG. Without a logo, the partner name is displayed.'
+        elif db_field.name == 'description':
+            field.help_text = 'Optional text displayed below this partner.'
+        return field
+
+
 @admin.register(PageSection)
 class PageSectionAdmin(admin.ModelAdmin):
     list_display = (
@@ -22,6 +43,26 @@ class PageSectionAdmin(admin.ModelAdmin):
     ordering = ('order',)
     inlines = [SectionContentInline]
     readonly_fields = ('section_type_display',)
+
+    def get_inlines(self, request, obj):
+        if obj and obj.section_type == 'PARTNERS':
+            return [PartnerContentInline]
+        return super().get_inlines(request, obj)
+
+    def get_fieldsets(self, request, obj=None):
+        if obj and obj.section_type == 'PARTNERS':
+            return [
+                ('Partners strip', {
+                    'fields': ('section_type_display', 'heading', 'subheading', 'is_active'),
+                    'description': 'Heading and subheading control the collaborators text and partnership tagline. Manage logos and partner text below.',
+                }),
+                ('Section settings', {
+                    'fields': ('section_type', 'content_type', 'object_id', 'order', 'label'),
+                    'classes': ('collapse',),
+                    'description': 'The homepage always places this strip between Hero and Overview.',
+                }),
+            ]
+        return super().get_fieldsets(request, obj)
 
     def section_type_display(self, obj):
         return obj.get_section_type_display()

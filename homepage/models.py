@@ -11,6 +11,7 @@ from django.contrib.contenttypes.models import ContentType
 class PageSection(models.Model):
     SECTION_TYPES = [
         ('HERO', 'Hero Banner'),
+        ('PARTNERS', 'Trust / Partners Strip'),
         ('OVERVIEW', 'Overview'),
         ('WHY_CHOOSE_US', 'Why Choose Us'),
         ('OUR_SERVICES', 'Our Services'),
