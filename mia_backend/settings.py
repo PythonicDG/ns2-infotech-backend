@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'modules',
     'contact',
     'aboutus',
-    'announcements'
+    'announcements',
+    'services',
 ]
 
 MIDDLEWARE = [
