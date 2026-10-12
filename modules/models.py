@@ -34,7 +34,7 @@ class Module(models.Model):
             self.slug = slugify(self.title)
 
         def convert_to_webp(image_field):
-            if image_field and hasattr(image_field, 'file'):
+            if image_field and not image_field._committed:
                 try:
                     image = PilImage.open(image_field.file)
                     image_io = io.BytesIO()
@@ -109,7 +109,7 @@ class PageSection(models.Model):
 
     def save(self, *args, **kwargs):
         def convert_to_webp(image_field):
-            if image_field and hasattr(image_field, 'file'):
+            if image_field and not image_field._committed:
                 try:
                     image = PilImage.open(image_field.file)
                     image_io = io.BytesIO()
@@ -158,7 +158,7 @@ class SectionContent(models.Model):
 
     def save(self, *args, **kwargs):
         def convert_to_webp(image_field):
-            if image_field and hasattr(image_field, 'file'):
+            if image_field and not image_field._committed:
                 try:
                     image = PilImage.open(image_field.file)
                     image_io = io.BytesIO()

@@ -13,7 +13,10 @@ class SectionContentSerializer(serializers.ModelSerializer):
 
 
 class PageSectionSerializer(serializers.ModelSerializer):
-    content_items = SectionContentSerializer(many=True, read_only=True)
+    content_items = serializers.SerializerMethodField()
+
+    def get_content_items(self, obj):
+        return SectionContentSerializer(obj.content_items.filter(is_active=True).order_by('order'), many=True, context=self.context).data
 
     class Meta:
         model = PageSection
@@ -22,6 +25,7 @@ class PageSectionSerializer(serializers.ModelSerializer):
             'super_heading', 'heading', 'highlighted_heading', 'subheading',
             'background_image', 'primary_image',
             'overlay_title', 'overlay_description',
+            'brochure', 'syllabus',
             'primary_button_text', 'primary_button_url',
             'secondary_button_text', 'secondary_button_url',
             'content_items',

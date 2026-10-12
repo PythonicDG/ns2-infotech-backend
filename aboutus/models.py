@@ -7,7 +7,7 @@ from PIL import Image as PilImage
 
 
 def convert_to_webp(image_field):
-    if image_field and hasattr(image_field, 'file'):
+    if image_field and not image_field._committed:
         image = PilImage.open(image_field.file)
         image_io = io.BytesIO()
         image.save(image_io, format='WEBP', quality=85)

@@ -71,7 +71,7 @@ class FooterItem(models.Model):
 
     def save(self, *args, **kwargs):
         def save_image(image_field):
-            if image_field and hasattr(image_field, 'path'):
+            if image_field and not image_field._committed:
                 img = PilImage.open(image_field)
                 img_io = io.BytesIO()
                 img.save(img_io, format = 'WEBP')
@@ -125,7 +125,7 @@ class CompanyProfile(models.Model):
 
     def save(self, *args, **kwargs):
         def save_image(image_field):
-            if image_field and hasattr(image_field, 'path'):
+            if image_field and not image_field._committed:
                 img = PilImage.open(image_field)
                 img_io = io.BytesIO()
                 img.save(img_io, format = 'WEBP')
@@ -149,7 +149,7 @@ class SocialLink(models.Model):
     
     def save(self, *args, **kwargs):
         def save_image(image_field):
-            if image_field:
+            if image_field and not image_field._committed:
                 img = PilImage.open(image_field)
                 img_io = io.BytesIO()
                 img.save(img_io, format='WEBP')
@@ -216,3 +216,28 @@ class Announcement(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class ContactPage(models.Model):
+    """Optional copy overrides; blank values retain the website's existing copy."""
+    id = models.PositiveSmallIntegerField(primary_key=True, default=1, editable=False)
+    heading = models.CharField(max_length=200, blank=True)
+    highlighted_heading = models.CharField(max_length=100, blank=True)
+    subheading = models.TextField(blank=True)
+    background_image = models.ImageField(upload_to='contact/hero/', blank=True)
+    use_contact_information = models.BooleanField(default=False, help_text='Use Contact information cards instead of the shared homepage contact section items.')
+    details_label = models.CharField(max_length=100, blank=True)
+    details_heading = models.CharField(max_length=200, blank=True)
+    details_description = models.TextField(blank=True)
+    form_heading = models.CharField(max_length=200, blank=True)
+    form_description = models.TextField(blank=True)
+    map_label = models.CharField(max_length=100, blank=True)
+    map_heading = models.CharField(max_length=200, blank=True)
+    map_description = models.TextField(blank=True)
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return 'Contact page text & banner'

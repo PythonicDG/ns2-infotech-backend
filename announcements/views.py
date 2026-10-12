@@ -1,6 +1,7 @@
 from rest_framework import viewsets, filters
 from .models import Announcement, AnnouncementCategory
 from .serializers import AnnouncementSerializer, AnnouncementCategorySerializer
+from django.utils import timezone
 
 class AnnouncementCategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = AnnouncementCategory.objects.filter(is_active=True)
@@ -16,7 +17,10 @@ class AnnouncementViewSet(viewsets.ReadOnlyModelViewSet):
     ordering = ['-publish_date', '-created_at']
 
     def get_queryset(self):
-        queryset = Announcement.objects.filter(is_active=True)
+        queryset = Announcement.objects.filter(
+            is_active=True, category__is_active=True,
+            publish_date__lte=timezone.localdate(),
+        )
         category_slug = self.request.query_params.get('category')
         if category_slug:
             queryset = queryset.filter(category__slug=category_slug)

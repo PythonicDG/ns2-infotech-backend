@@ -27,6 +27,7 @@ class Announcement(models.Model):
     full_description = models.TextField(blank=True, null=True, help_text="Detailed content of the announcement.")
     category = models.ForeignKey(AnnouncementCategory, on_delete=models.CASCADE, related_name='announcements')
     attachment = models.FileField(upload_to='announcements/attachments/', blank=True, null=True)
+    image = models.ImageField(upload_to='announcements/images/', blank=True)
     publish_date = models.DateField(default=timezone.now)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -42,3 +43,21 @@ class Announcement(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+
+class AnnouncementPage(models.Model):
+    id = models.PositiveSmallIntegerField(primary_key=True, default=1, editable=False)
+    heading = models.CharField(max_length=200, blank=True)
+    highlighted_heading = models.CharField(max_length=100, blank=True)
+    heading_suffix = models.CharField(max_length=100, blank=True)
+    subheading = models.TextField(blank=True)
+    background_image = models.ImageField(upload_to='announcements/hero/', blank=True)
+    board_heading = models.CharField(max_length=200, blank=True)
+    board_description = models.TextField(blank=True)
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return 'Announcements page text & banner'

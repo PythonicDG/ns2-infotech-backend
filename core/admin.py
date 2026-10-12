@@ -6,8 +6,10 @@ from .models import (
     FooterItem,
     FooterSubscription,
     CompanyProfile, SocialLink, ContactMessage, ContactInfo,
-    SiteStatistic, Announcement
+    SiteStatistic, Announcement, ContactPage
 )
+
+admin.site.register(ContactPage)
 
 
 class SubMenuInline(admin.TabularInline):

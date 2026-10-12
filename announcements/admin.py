@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Announcement, AnnouncementCategory
+from .models import Announcement, AnnouncementCategory, AnnouncementPage
+
+admin.site.register(AnnouncementPage)
 
 @admin.register(AnnouncementCategory)
 class AnnouncementCategoryAdmin(admin.ModelAdmin):
