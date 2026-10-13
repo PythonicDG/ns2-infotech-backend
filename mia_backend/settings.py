@@ -1,7 +1,5 @@
 from pathlib import Path
 from decouple import config
-import dj_database_url
-import os
 import mimetypes
 
 mimetypes.add_type('image/webp', '.webp')
@@ -11,8 +9,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-replace-this')
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-# ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+    if host.strip()
+]
 
 TEMPLATES = [
     {
@@ -65,12 +66,21 @@ ROOT_URLCONF = 'mia_backend.urls'
 WSGI_APPLICATION = 'mia_backend.wsgi.application'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# Database settings intentionally use individual credentials rather than a
+# DATABASE_URL.  Set DB_HOST and DB_PORT for the PostgreSQL server.
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL', default=f"postgres://{config('DB_USER', default='mia_user')}:{config('DB_PASSWORD', default='StrongPassword123!')}@{config('DB_HOST', default='localhost')}:{config('DB_PORT', default='5432')}/{config('DB_NAME', default='mia_db')}"),
-        conn_max_age=600,
-        ssl_require=not DEBUG
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST', default='127.0.0.1'),
+        'PORT': config('DB_PORT', default='5432'),
+        'CONN_MAX_AGE': config('DB_CONN_MAX_AGE', default=600, cast=int),
+        'OPTIONS': {
+            'sslmode': config('DB_SSLMODE', default='prefer'),
+        },
+    }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -92,9 +102,17 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-CORS_ALLOWED_ORIGINS = [o for o in config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000,http://localhost:8000').split(',') if o]
-CSRF_TRUSTED_ORIGINS = [o for o in config('CSRF_TRUSTED_ORIGINS', default='http://localhost:3000,http://localhost:8000').split(',') if o.startswith('http')]
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    origin.strip()
+    for origin in config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000').split(',')
+    if origin.strip()
+]
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in config('CSRF_TRUSTED_ORIGINS', default='http://localhost:3000').split(',')
+    if origin.strip().startswith(('http://', 'https://'))
+]
+CORS_ALLOW_ALL_ORIGINS = config('CORS_ALLOW_ALL_ORIGINS', default=False, cast=bool)
 
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
